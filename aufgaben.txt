@@ -1,0 +1,88 @@
+('Breitensuche graph_1: ', ['A', 'B', 'C', 'D', 'E'])
+('Breitensuche graph_2: ', ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'G', 'I'])
+('Breitensuche graph_3: ', ['A', 'B', 'D', 'F', 'C', 'E', 'G', 'I', 'H'])
+('Breitensuche graph_4: ', ['D', 'C', 'I', 'B', 'F', 'H', 'K', 'A', 'E', 'G', 'J', 'L'])
+
+
+
+1. Warteschlange: 
+
+List -> geordnet
+ list.append(element)  -> Element am Ende einfügen: 
+ list.pop()            -> zuletzt eingefügtes Element entnehmen und zurückgeben
+ list.pop(0)           -> zuerst eingefügtes Element entnehmen und zurückgeben
+
+-> leere initialisieren
+-> drei verschiedene Zahlen hinzufügen
+-> diejenige, die zuerst eingefügt wurde, am Anfang entnehmen
+
+2. Nachbarn eines Knoten in einem Graphen ausgeben
+
+Repetition: Graph wird als Nachbarschaftliste repräsentiert: 
+In Python ist das ein "Dictionary", der für jeden Knoten seine Nachbarn enthält: 
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'D'],
+    'D': ['B', 'C', 'E'],
+    'E': ['B', 'D']
+}
+
+Um die Nachbarn von B zurückzugeben, genügt es, das entsprechende Element aus dem Dictonary zu holen: 
+nachbarn_von_B = graph['B']  
+Das Resultat ist eine Liste, welche die Nachbarn von B enthält, also ['A', 'D', 'E']
+
+Implementiere eine Methode mit zwei Parametern "knoten" und "graph", welche die Nachbarn des entsprechenden Knotens zurückgibt (eine Liste). Teste die Funktion mit den vorgegebenen Graphen...
+
+def nachbarn_von(knoten, graph):
+    return graph[knoten]
+
+3. Implementiere eine Methode "breitensuche" mit zwei Parametern "graph", "start_knoten", welche eine geordnete Liste der Knoten zurückgibt, die beginnend ab start_knoten den ganzen Graphen mit der Breitensuche durchsucht. 
+
+Den ersten Teil der Aufgabe habe ich vorbereitet => File 1
+
+
+a) Definiere die Methode "breitensuche" mit zwei Parametern "graph", "start_knoten", welche eine leere Liste zurückgibt. 
+   Danach rufen wir die Methode mit dem gegebenen Graph "graph_1" und Startknoten 'A' auf. 
+
+graph_1 = {...}
+graph_2 = {...}
+
+def breitensuche(graph, start_knoten):
+    besuchte_knoten = [start_knoten]  # Liste mit allen Knoten, die durchsucht werden
+    # ab hier wird im naechsten Schritt die Suche implementiert...
+    return besuchte_knoten
+
+print "Breitensuche in graph_1: ", breitensuche(graph_1, 'A')  
+print "Breitensuche in graph_2: ", breitensuche(graph_2, 'D')  
+
+=> zum Laufen bringen...
+
+b) Implementiere den Algorithmus wie folgt: 
+
+def breitensuche(graph, start_knoten):
+    besuchte_knoten = [start_knoten]
+    # definieren Sie eine Warteschlange und fügen Sie den start_knoten ein
+    # solange die Warteschlange nicht leer ist:
+        # entnehmen Sie den vordersten Knoten aus der Warteschlange und speichern Sie ihn in der Variable "aktueller_knoten"
+        # finden Sie alle Nachbarnknoten von "aktueller_knoten"
+        # für jeden dieser Nachbarknoten:
+            # wenn der Nachbar nicht schon in der Liste von "besuchte_knoten" ist:
+                # fügen Sie den Nachbarn der Warteschlange hinzu
+                # fügen Sie den Nachbarn der Liste "besuchte_knoten" hinzu
+    return besuchte_knoten
+
+4. Wir implementieren eine neue Methode "kuerzester_weg", welche in einem Graphen den kürzesten Weg zwischen zwei Knoten findet. 
+
+a) implementiere "ist_weg_vorhanden" und verwende dabei den Codeteile aus der Methode breitensuche. 
+   Rückgabewert: True oder False, je nachdem, ob ein Weg gefunden wird oder nicht.
+
+b) implementiere "kuerzester_weg"
+
+Hint: 
+Verwenden Sie neben der Liste "besuchte_knoten" noch einen zusätzlichen Dictionary, der für jeden besuchten Knoten zusätzlich seinen Eltern Knoten speichert. Der Startknoten hat keinen Elternknoten: der Dictionary kann daher wie folgt initialisiert werden: 
+eltern_dict = {start_knoten: None}
+Um am Schluss den zurückgelegten Pfad vom Startknoten zum Zielknoten zurückzugeben, muss der Eltern Dictionary verwendet werden...
+
+
