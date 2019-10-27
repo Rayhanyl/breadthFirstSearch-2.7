@@ -1,12 +1,14 @@
-from copy import deepcopy
+warteschlange = []
+warteschlange.append('A')
+warteschlange.append('B')
+warteschlange.append('C')
 
-my_list = []
-my_list.append('A')
-my_list.append('B')
-my_list.append('C')
+print warteschlange.pop(0)  # A
+print warteschlange.pop()   # C
 
-my_queue = deepcopy(my_list)
-my_stack = deepcopy(my_list)
+warteschlange = []
+warteschlange.append(100)
+warteschlange.append(200)
+warteschlange.append(300)
 
-print my_queue.pop(0)
-print my_stack.pop()
+print warteschlange.pop(0)  # 100

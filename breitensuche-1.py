@@ -8,7 +8,8 @@ def breitensuche(graph, start_knoten):
     besuchte_knoten = [start_knoten]
     while warteschlange:
         aktueller_knoten = warteschlange.pop(0)
-        for nachbar in nachbarn_von(aktueller_knoten, graph):
+        aktuelle_nachbarn = nachbarn_von(aktueller_knoten, graph)
+        for nachbar in aktuelle_nachbarn:
             if nachbar not in besuchte_knoten:
                 warteschlange.append(nachbar)
                 besuchte_knoten.append(nachbar)
@@ -32,7 +33,8 @@ def ist_weg_vorhanden(graph, start_knoten, ziel_knoten):
     besuchte_knoten = [start_knoten]
     while warteschlange:
         aktueller_knoten = warteschlange.pop(0)
-        for nachbar in nachbarn_von(aktueller_knoten, graph):
+        aktuelle_nachbarn = nachbarn_von(aktueller_knoten, graph)
+        for nachbar in aktuelle_nachbarn:
             if nachbar == ziel_knoten:
                 return True
             elif nachbar not in besuchte_knoten:
@@ -49,7 +51,8 @@ def kuerzester_weg(graph, start_knoten, ziel_knoten):
     eltern_dict = {start_knoten: None}
     while warteschlange:
         aktueller_knoten = warteschlange.pop(0)
-        for nachbar in nachbarn_von(aktueller_knoten, graph):
+        aktuelle_nachbarn = nachbarn_von(aktueller_knoten, graph)
+        for nachbar in aktuelle_nachbarn:
             if nachbar == ziel_knoten:
                 besuchte_knoten.append(nachbar)
                 eltern_dict[nachbar] = aktueller_knoten
@@ -73,6 +76,17 @@ graph_1 = {
     'I': ['C', 'E', 'H']
 }
 
+graph_1_g = {
+    'A': ['F'],
+    'B': ['A', 'C'],
+    'C': ['E', 'I'],
+    'D': ['A'],
+    'E': ['B', 'D','H'],
+    'F': ['D', 'G'],
+    'G': ['D', 'E',],
+    'H': ['G'],
+    'I': ['E', 'H']
+}
 graph_2 = {
     'A': ['B'],
     'B': ['A', 'C', 'E'],
@@ -88,8 +102,9 @@ graph_2 = {
     'L': ['K']
 }
 
-print "Breitensuche in graph_1: ", breitensuche(graph_1, 'A')  # A B D F C E G I H
-print "Breitensuche in graph_2: ", breitensuche(graph_2, 'D')  # D C I B F H K A E G J L
+print "Breitensuche in graph_1:   ", breitensuche(graph_1, 'A')  # A B D F C E G I H
+print "Breitensuche in graph_2:   ", breitensuche(graph_2, 'D')  # D C I B F H K A E G J L
+print "Breitensuche in graph_1_g: ", breitensuche(graph_1_g, 'A')  # A F D G E B H C I
 print ""
 print "Wegsuche in graph_1"
 print "  von A nach D: ", ist_weg_vorhanden(graph_1, 'A', 'D')  # True
